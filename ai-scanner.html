@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Vision Scanner - VegSense</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="css/ai-scanner.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-wrapper">
+                <div class="logo">
+                    <a href="index.html" style="text-decoration: none; color: inherit; display: flex; align-items: center; gap: 10px;">
+                        <span class="logo-icon">🌿</span>
+                        <span class="logo-text">VegSense</span>
+                    </a>
+                </div>
+                <div class="nav-links">
+                    <a href="index.html">Home</a>
+                    <a href="ai-scanner.html" class="active">AI Scanner</a>
+                    <a href="dashboard.html">Dashboard</a>
+                    <a href="community.html">Community</a>
+                    <a href="iot-monitor.html">IoT Monitor</a>
+                    <a href="marketplace.html">Marketplace</a>
+                    <a href="login.html">Login</a>
+                </div>
+                <div class="mobile-menu-toggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- AI Scanner Main Section -->
+    <section class="scanner-hero">
+        <div class="container">
+            <div class="scanner-header">
+                <h1>🤖 AI Vision Scanner</h1>
+                <p>Use AI to instantly verify if your produce is organic or non-organic</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Scanner Interface -->
+    <section class="scanner-interface">
+        <div class="container">
+            <div class="scanner-grid">
+                <!-- Left: Scanner Controls -->
+                <div class="scanner-controls">
+                    <div class="scanner-card">
+                        <h2>Upload or Capture Image</h2>
+                        
+                        <div class="upload-area" id="uploadArea">
+                            <div class="upload-icon">📸</div>
+                            <h3>Click to upload or drag & drop</h3>
+                            <p>Support: JPG, PNG, WEBP (Max 10MB)</p>
+                            <input type="file" id="imageInput" accept="image/*" hidden>
+                        </div>
+
+                        <div class="camera-section" id="cameraSection" style="display: none;">
+                            <video id="cameraStream" autoplay playsinline></video>
+                            <canvas id="captureCanvas" style="display: none;"></canvas>
+                            <button class="btn-primary btn-full" id="captureBtn">📸 Capture Photo</button>
+                            <button class="btn-secondary btn-full" id="stopCameraBtn">Stop Camera</button>
+                        </div>
+
+                        <div class="button-group">
+                            <button class="btn-secondary btn-full" id="useCameraBtn">
+                                📷 Use Camera
+                            </button>
+                            <button class="btn-outline btn-full" id="uploadFileBtn">
+                                📁 Choose File
+                            </button>
+                        </div>
+
+                        <div class="preview-section" id="previewSection" style="display: none;">
+                            <h3>Selected Image:</h3>
+                            <img id="imagePreview" alt="Preview">
+                            <button class="btn-primary btn-full" id="analyzeBtn">
+                                🔍 Analyze Image
+                            </button>
+                            <button class="btn-outline btn-full" id="clearBtn">
+                                ✕ Clear & Select Another
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Sample Images -->
+                    <div class="scanner-card">
+                        <h3>Try Sample Images</h3>
+                        <div class="sample-images">
+                            <div class="sample-img" data-type="organic" data-name="Organic Tomato">
+                                <img src="https://images.unsplash.com/photo-1592924357228-91a4daadcfea?w=200&h=200&fit=crop" alt="Organic Tomato">
+                                <span>Organic Tomato</span>
+                            </div>
+                            <div class="sample-img" data-type="non-organic" data-name="Regular Carrot">
+                                <img src="https://images.unsplash.com/photo-1598170845058-32b9d6a5da37?w=200&h=200&fit=crop" alt="Regular Carrot">
+                                <span>Regular Carrot</span>
+                            </div>
+                            <div class="sample-img" data-type="organic" data-name="Organic Spinach">
+                                <img src="https://images.unsplash.com/photo-1576045057995-568f588f82fb?w=200&h=200&fit=crop" alt="Organic Spinach">
+                                <span>Organic Spinach</span>
+                            </div>
+                            <div class="sample-img" data-type="non-organic" data-name="Regular Lettuce">
+                                <img src="https://images.unsplash.com/photo-1622206151226-18ca2c9ab4a1?w=200&h=200&fit=crop" alt="Regular Lettuce">
+                                <span>Regular Lettuce</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right: Analysis Results -->
+                <div class="analysis-results">
+                    <div class="scanner-card">
+                        <div id="waitingState" class="result-state">
+                            <div class="waiting-icon">🌿</div>
+                            <h3>Ready to Scan</h3>
+                            <p>Upload or capture an image of produce to begin AI analysis</p>
+                            <div class="features-list">
+                                <div class="feature-item">✓ 95%+ Accuracy Rate</div>
+                                <div class="feature-item">✓ Instant Results</div>
+                                <div class="feature-item">✓ Detailed Analysis</div>
+                                <div class="feature-item">✓ Pesticide Risk Info</div>
+                            </div>
+                        </div>
+
+                        <div id="analyzingState" class="result-state" style="display: none;">
+                            <div class="analyzing-animation">
+                                <div class="spinner"></div>
+                            </div>
+                            <h3>Analyzing Image...</h3>
+                            <p>Our AI is processing the visual characteristics</p>
+                            <div class="progress-steps">
+                                <div class="step active">1. Image Processing</div>
+                                <div class="step">2. Feature Extraction</div>
+                                <div class="step">3. AI Classification</div>
+                                <div class="step">4. Generating Report</div>
+                            </div>
+                        </div>
+
+                        <div id="resultsState" class="result-state" style="display: none;">
+                            <div class="result-badge" id="resultBadge">
+                                <span class="badge-icon">✓</span>
+                                <span class="badge-text">ORGANIC</span>
+                            </div>
+                            
+                            <div class="confidence-meter">
+                                <h4>Confidence Score</h4>
+                                <div class="confidence-bar">
+                                    <div class="confidence-fill" id="confidenceFill"></div>
+                                </div>
+                                <p class="confidence-text"><span id="confidenceValue">95</span>% Confident</p>
+                            </div>
+
+                            <div class="analysis-details">
+                                <h4>Detailed Analysis</h4>
+                                
+                                <div class="detail-section">
+                                    <h5>🔬 Visual Characteristics</h5>
+                                    <ul id="visualCharacteristics"></ul>
+                                </div>
+
+                                <div class="detail-section">
+                                    <h5>🌱 Nutritional Information</h5>
+                                    <div class="nutrition-grid" id="nutritionInfo"></div>
+                                </div>
+
+                                <div class="detail-section">
+                                    <h5>⚠️ Pesticide Risk Assessment</h5>
+                                    <div class="risk-indicator" id="pesticideRisk"></div>
+                                </div>
+
+                                <div class="detail-section">
+                                    <h5>📊 Quality Metrics</h5>
+                                    <div class="metrics-grid" id="qualityMetrics"></div>
+                                </div>
+
+                                <div class="detail-section">
+                                    <h5>💡 Recommendations</h5>
+                                    <ul id="recommendations"></ul>
+                                </div>
+                            </div>
+
+                            <div class="action-buttons">
+                                <button class="btn-primary" id="saveResultBtn">💾 Save Result</button>
+                                <button class="btn-secondary" id="shareResultBtn">🔗 Share</button>
+                                <button class="btn-outline" id="scanAnotherBtn">🔄 Scan Another</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Scan History -->
+                    <div class="scanner-card">
+                        <h3>Recent Scans</h3>
+                        <div class="scan-history" id="scanHistory">
+                            <p class="empty-state">No scans yet. Start scanning to see your history!</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section class="how-it-works">
+        <div class="container">
+            <h2 class="section-title">How AI Vision Works</h2>
+            <div class="steps-grid">
+                <div class="step-card">
+                    <div class="step-number">1</div>
+                    <h3>Capture or Upload</h3>
+                    <p>Take a photo of produce or upload an existing image from your device</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-number">2</div>
+                    <h3>AI Analysis</h3>
+                    <p>Our trained model analyzes texture, color, surface characteristics, and patterns</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-number">3</div>
+                    <h3>Get Results</h3>
+                    <p>Receive instant classification with confidence scores and detailed insights</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-number">4</div>
+                    <h3>Take Action</h3>
+                    <p>Save results, share with others, or make informed purchasing decisions</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-column">
+                    <div class="footer-logo">
+                        <span class="logo-icon">🌿</span>
+                        <span class="logo-text">VegSense</span>
+                    </div>
+                    <p>Empowering farmers with AI-driven organic verification.</p>
+                </div>
+                <div class="footer-column">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="ai-scanner.html">AI Scanner</a></li>
+                        <li><a href="dashboard.html">Dashboard</a></li>
+                        <li><a href="marketplace.html">Marketplace</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 VegSense. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script src="js/ai-scanner.js"></script>
+</body>
+</html>

@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Agriculture Dashboard - VegSense</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-wrapper">
+                <div class="logo">
+                    <a href="index.html" class="logo-link">
+                        <span class="logo-icon">🌿</span>
+                        <span class="logo-text">VegSense</span>
+                    </a>
+                </div>
+                <div class="nav-links">
+                    <a href="index.html">Home</a>
+                    <a href="ai-scanner.html">AI Scanner</a>
+                    <a href="dashboard.html" class="active">Dashboard</a>
+                    <a href="community.html">Community</a>
+                    <a href="iot-monitor.html">IoT Monitor</a>
+                    <a href="marketplace.html">Marketplace</a>
+                    <div class="user-menu">
+                        <span class="user-avatar">👨‍🌾</span>
+                        <span class="user-name">Raj Kumar</span>
+                    </div>
+                </div>
+                <div class="mobile-menu-toggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Dashboard Content -->
+    <div class="dashboard-wrapper">
+        <!-- Sidebar -->
+        <aside class="dashboard-sidebar">
+            <div class="sidebar-menu">
+                <a href="#overview" class="menu-item active" data-section="overview">
+                    <span class="menu-icon">📊</span>
+                    <span class="menu-text">Overview</span>
+                </a>
+                <a href="#crops" class="menu-item" data-section="crops">
+                    <span class="menu-icon">🌾</span>
+                    <span class="menu-text">My Crops</span>
+                </a>
+                <a href="#soil" class="menu-item" data-section="soil">
+                    <span class="menu-icon">🌱</span>
+                    <span class="menu-text">Soil Data</span>
+                </a>
+                <a href="#certifications" class="menu-item" data-section="certifications">
+                    <span class="menu-icon">📜</span>
+                    <span class="menu-text">Certifications</span>
+                </a>
+                <a href="#analytics" class="menu-item" data-section="analytics">
+                    <span class="menu-icon">📈</span>
+                    <span class="menu-text">Analytics</span>
+                </a>
+                <a href="#reports" class="menu-item" data-section="reports">
+                    <span class="menu-icon">📄</span>
+                    <span class="menu-text">Reports</span>
+                </a>
+                <a href="#settings" class="menu-item" data-section="settings">
+                    <span class="menu-icon">⚙️</span>
+                    <span class="menu-text">Settings</span>
+                </a>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="dashboard-main">
+            <!-- Overview Section -->
+            <section id="overview" class="dashboard-section active">
+                <div class="section-header">
+                    <h1>Dashboard Overview</h1>
+                    <button class="btn-primary" id="addCropBtn">+ Add New Crop</button>
+                </div>
+
+                <!-- Stats Cards -->
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon">🌾</div>
+                        <div class="stat-content">
+                            <h3>Total Crops</h3>
+                            <p class="stat-value" id="totalCrops">12</p>
+                            <span class="stat-change positive">+2 this month</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">✅</div>
+                        <div class="stat-content">
+                            <h3>Certified Organic</h3>
+                            <p class="stat-value" id="certifiedCrops">8</p>
+                            <span class="stat-change">66% of total</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">📈</div>
+                        <div class="stat-content">
+                            <h3>Avg. Score</h3>
+                            <p class="stat-value">92.5</p>
+                            <span class="stat-change positive">+5.2% from last month</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">💰</div>
+                        <div class="stat-content">
+                            <h3>Revenue</h3>
+                            <p class="stat-value">₹45,000</p>
+                            <span class="stat-change positive">+12% this month</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quick Actions -->
+                <div class="quick-actions">
+                    <h2>Quick Actions</h2>
+                    <div class="actions-grid">
+                        <button class="action-card">
+                            <span class="action-icon">🌾</span>
+                            <span class="action-text">Register New Crop</span>
+                        </button>
+                        <button class="action-card">
+                            <span class="action-icon">📊</span>
+                            <span class="action-text">Upload Soil Data</span>
+                        </button>
+                        <button class="action-card">
+                            <span class="action-icon">🔬</span>
+                            <span class="action-text">Request Analysis</span>
+                        </button>
+                        <button class="action-card">
+                            <span class="action-icon">📜</span>
+                            <span class="action-text">Generate Certificate</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Recent Activity -->
+                <div class="recent-activity">
+                    <h2>Recent Activity</h2>
+                    <div class="activity-list" id="activityList">
+                        <div class="activity-item">
+                            <div class="activity-icon">✅</div>
+                            <div class="activity-content">
+                                <h4>Organic Certification Approved</h4>
+                                <p>Your tomato crop received organic certification</p>
+                                <span class="activity-time">2 hours ago</span>
+                            </div>
+                        </div>
+                        <div class="activity-item">
+                            <div class="activity-icon">📊</div>
+                            <div class="activity-content">
+                                <h4>Soil Data Updated</h4>
+                                <p>New soil analysis data uploaded for Field A</p>
+                                <span class="activity-time">5 hours ago</span>
+                            </div>
+                        </div>
+                        <div class="activity-item">
+                            <div class="activity-icon">🌱</div>
+                            <div class="activity-content">
+                                <h4>New Crop Registered</h4>
+                                <p>Organic spinach added to your portfolio</p>
+                                <span class="activity-time">1 day ago</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Crops Section -->
+            <section id="crops" class="dashboard-section">
+                <div class="section-header">
+                    <h1>My Crops</h1>
+                    <button class="btn-primary" id="addCropBtn2">+ Add New Crop</button>
+                </div>
+
+                <div class="filters-bar">
+                    <input type="text" placeholder="Search crops..." class="search-input" id="cropSearch">
+                    <select class="filter-select" id="statusFilter">
+                        <option value="all">All Status</option>
+                        <option value="growing">Growing</option>
+                        <option value="harvest">Ready to Harvest</option>
+                        <option value="certified">Certified</option>
+                    </select>
+                    <select class="filter-select" id="typeFilter">
+                        <option value="all">All Types</option>
+                        <option value="vegetables">Vegetables</option>
+                        <option value="fruits">Fruits</option>
+                        <option value="grains">Grains</option>
+                    </select>
+                </div>
+
+                <div class="crops-grid" id="cropsGrid"></div>
+            </section>
+
+            <!-- Soil Data Section -->
+            <section id="soil" class="dashboard-section">
+                <div class="section-header">
+                    <h1>Soil Data Management</h1>
+                    <button class="btn-primary" id="uploadSoilDataBtn">📊 Upload Data</button>
+                </div>
+
+                <div class="soil-metrics">
+                    <div class="metric-card">
+                        <h3>pH Level</h3>
+                        <div class="metric-value">6.8</div>
+                        <div class="metric-status good">Optimal</div>
+                        <div class="metric-chart" id="phChart"></div>
+                    </div>
+                    <div class="metric-card">
+                        <h3>Nitrogen (N)</h3>
+                        <div class="metric-value">42 ppm</div>
+                        <div class="metric-status good">Good</div>
+                        <div class="metric-chart" id="nitrogenChart"></div>
+                    </div>
+                    <div class="metric-card">
+                        <h3>Phosphorus (P)</h3>
+                        <div class="metric-value">38 ppm</div>
+                        <div class="metric-status warning">Low</div>
+                        <div class="metric-chart" id="phosphorusChart"></div>
+                    </div>
+                    <div class="metric-card">
+                        <h3>Potassium (K)</h3>
+                        <div class="metric-value">125 ppm</div>
+                        <div class="metric-status good">Excellent</div>
+                        <div class="metric-chart" id="potassiumChart"></div>
+                    </div>
+                </div>
+
+                <div class="soil-history">
+                    <h2>Soil Test History</h2>
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Field</th>
+                                <th>pH</th>
+                                <th>N-P-K</th>
+                                <th>Organic Matter</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="soilHistoryTable"></tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Certifications Section -->
+            <section id="certifications" class="dashboard-section">
+                <div class="section-header">
+                    <h1>Organic Certifications</h1>
+                    <button class="btn-primary" id="requestCertBtn">📜 Request Certificate</button>
+                </div>
+
+                <div class="certifications-grid" id="certificationsGrid"></div>
+            </section>
+
+            <!-- Analytics Section -->
+            <section id="analytics" class="dashboard-section">
+                <div class="section-header">
+                    <h1>Analytics & Insights</h1>
+                    <select class="filter-select">
+                        <option>Last 7 days</option>
+                        <option>Last 30 days</option>
+                        <option>Last 3 months</option>
+                        <option>Last year</option>
+                    </select>
+                </div>
+
+                <div class="charts-grid">
+                    <div class="chart-card">
+                        <h3>Crop Performance</h3>
+                        <canvas id="cropPerformanceChart"></canvas>
+                    </div>
+                    <div class="chart-card">
+                        <h3>Certification Trend</h3>
+                        <canvas id="certificationTrendChart"></canvas>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Add Crop Modal -->
+    <div id="addCropModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Register New Crop</h2>
+                <span class="modal-close">&times;</span>
+            </div>
+            <form id="addCropForm" class="modal-form">
+                <div class="form-group">
+                    <label>Crop Name *</label>
+                    <input type="text" name="cropName" required placeholder="e.g., Tomatoes">
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Type *</label>
+                        <select name="cropType" required>
+                            <option value="">Select type</option>
+                            <option value="vegetables">Vegetables</option>
+                            <option value="fruits">Fruits</option>
+                            <option value="grains">Grains</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Area (acres) *</label>
+                        <input type="number" name="area" required step="0.1">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Planting Date *</label>
+                        <input type="date" name="plantingDate" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Expected Harvest</label>
+                        <input type="date" name="harvestDate">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Farming Method *</label>
+                    <select name="farmingMethod" required>
+                        <option value="organic">Organic</option>
+                        <option value="conventional">Conventional</option>
+                        <option value="transitioning">Transitioning to Organic</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Notes</label>
+                    <textarea name="notes" rows="3" placeholder="Additional information..."></textarea>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn-secondary modal-close">Cancel</button>
+                    <button type="submit" class="btn-primary">Register Crop</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script src="js/dashboard.js"></script>
+</body>
+</html>
